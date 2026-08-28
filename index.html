@@ -499,8 +499,8 @@ function welcome(){
 function soilScreen(){
   return `<div class="narrow">${progress()}<div class="stack">
     <div><div class="eyebrow">Decision 1 of 6</div><h2 class="sc">Your soil nitrogen</h2>
-      <p class="lede">Before you buy a single pound of fertiliser, your soil is already holding nitrogen.
-      A soil test tells you how much. Set the level your field came back at.</p></div>
+      <p class="lede">Before you buy a single pound of fertilizer, your soil is already holding nitrogen.
+      A soil test tells you how much.</p></div>
     ${dial({key:"soilN",label:"Soil nitrate, 0&ndash;24 in",unit:"lb/ac",value:S.soilN,display:S.soilN,
       min:SOIL.min,max:SOIL.max,step:SOIL.step,color:"#8A6B3A",
       hint:"TAPS plots tested between 49 and 479 lb/ac across 2024 and 2025, with a median near 175."})}
