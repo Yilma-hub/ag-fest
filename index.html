@@ -472,7 +472,7 @@ function dial(o){ const pct=((o.value-o.min)/(o.max-o.min))*100;
 
 /* ── screens ────────────────────────────────────────────────────────────── */
 function welcome(){
-  const groups=["Student","Grower","Visitor","CSU staff","4-H / FFA"];
+  const groups=["Student","Grower","Visitor","CSU staff"];
   return `<div class="stack narrow">
     <div><div class="eyebrow">Colorado State University &middot; Ag Fest</div>
       <h1 class="hero">Virtual Farm<br>Competition</h1>
@@ -551,15 +551,12 @@ function nitrogenScreen(){
         <i id="bkBag" style="width:${100*fromBag/scale}%;background:var(--nitro)"></i></div>
       <div class="legend"><span><em style="background:#8A6B3A"></em>From your soil &mdash; <b id="soilLb">${S.soilN}</b> lb</span>
         <span><em style="background:var(--nitro)"></em>From the bag &mdash; <b id="bagLb">${fromBag.toFixed(0)}</b> lb taken up</span></div>
-      <div class="small" style="margin-top:9px">You apply <b id="appLb">${applied}</b> lb/ac. The crop recovers
-      about <b id="recPct">${(rec*100).toFixed(0)}</b>% of it &mdash; the rest leaches, escapes to the air, or stays locked up.</div>
     </div>
     ${dial({key:"nPre",label:"Pre-plant",unit:"lb/ac",value:S.nPre,display:S.nPre,min:0,max:30,step:10,color:"var(--nitro)",
       hint:"Comes in the pre-plant mix with phosphorus, worked in before the planter runs. The full package is 30 lb N per acre."})}
     ${dial({key:"nSide",label:"Side-dress",unit:"lb/ac",value:S.nSide,display:S.nSide,min:0,max:250,step:25,color:"var(--nitro)",
-      hint:"Knifed in beside the row when the corn is knee-high. The toolbar meters in 25 lb steps &mdash; that is the equipment, not a rounding choice."})}
-    ${dial({key:"nFert",label:"Fertigation total",unit:"lb/ac",value:S.nFert,display:S.nFert,min:0,max:50,step:10,color:"var(--nitro)",
-      hint:"Dissolved into the irrigation water and spread across the season."})}
+      hint:"Knifed in beside the row when the corn is knee-high. Applied in 25 lb steps."})}
+    ${dial({key:"nFert",label:"Fertigation total",unit:"lb/ac",value:S.nFert,display:S.nFert,min:0,max:50,step:10,color:"var(--nitro)"})}
     <div class="panel pad"><div class="eyebrow m">Split the fertigation into</div>
       <div class="chips" style="margin-top:10px">
         ${[3,4].map(n=>`<button class="chip${S.nEvents===n?' on':''}" data-ev="${n}">${n} applications</button>`).join('')}
@@ -602,8 +599,7 @@ function budgetScreen(){
   const line=(k,v)=>`<tr><td>${k}</td><td>$${v.toFixed(2)}</td></tr>`;
   return `<div class="narrow">${progress()}<div class="stack">
     <div><div class="eyebrow">Decision 6 of 6</div><h2 class="sc">Your cost of production</h2>
-      <p class="lede">Every line and every price below comes from the CSU TAPS 2026 Farm Budget at April
-      prices, using the same row names as that spreadsheet. Lines you did not use are hidden.</p></div>
+      <p class="lede">What this acre costs to grow.</p></div>
     <div class="panel pad"><div class="eyebrow m">Field Operations</div>
       <table class="tbl" style="margin-top:8px">
         ${Object.entries(c.ops).filter(([k,v])=>v>0).map(([k,v])=>line(k,v)).join('')}
@@ -873,7 +869,7 @@ function refreshN(){
   const s1=document.getElementById("bkSoil"); if(s1) s1.style.width=(100*S.soilN/scale)+"%";
   set("soilLb",S.soilN);
   const s2=document.getElementById("bkBag"); if(s2) s2.style.width=(100*fromBag/scale)+"%";
-  set("bagLb",fromBag.toFixed(0)); set("appLb",applied); set("recPct",(rec*100).toFixed(0));
+  set("bagLb",fromBag.toFixed(0));
 }
 function setInput(k,val,fromSlider){
   const L=LIMITS[k];
