@@ -7,75 +7,75 @@
 <meta name="robots" content="noindex, nofollow, noarchive" />
 <meta name="description" content="Manage one acre of Colorado corn. Set hybrid, seeding rate, nitrogen and irrigation, then see your yield, nitrogen and water use efficiency, and your farm budget." />
 <style>
+/* Calibri throughout. Carlito is the metric-compatible fallback on Linux and
+   most Android devices; the rest is a standard system fallback chain. */
 :root{
-  --canvas:#FAF8F3;--surface:#FFFFFF;--surf2:#F2EFE6;
-  --green:#1E4D2B;--green-dk:#143620;--green-lt:#E7EFE8;
-  --gold:#C8C372;--gold-dk:#8A7F2E;--gold-lt:#F6F3DC;
-  --ink:#1B211D;--mute:#5F6F63;--line:#DFDCD0;
-  --water:#2E7DA6;--nitro:#B0741C;--stand:#4E8B3C;--red:#B4432F;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --disp:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --canvas:#FFFFFF;--surface:#FFFFFF;--surf2:#F4F4F4;
+  --green:#1E4D2B;--green-dk:#143620;--green-lt:#EDF3EE;
+  --ink:#000000;--mute:#5A5A5A;--line:#D6D6D6;
+  --red:#B00020;
+  --font:Calibri,Carlito,"Segoe UI",system-ui,-apple-system,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--canvas);color:var(--ink);font-family:var(--disp);-webkit-font-smoothing:antialiased}
+html,body{background:var(--canvas);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 body{min-height:100vh;padding:16px 16px 44px}
 button,input{font:inherit;color:inherit}
 button{background:none;border:none;cursor:pointer}
 :focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:6px}
 .wrap{max-width:1060px;margin:0 auto}
 .narrow{max-width:600px;margin:0 auto}
-.mono{font-family:var(--mono)}
+.mono{font-family:var(--font)}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px}
 .pad{padding:16px}
 .stack{display:flex;flex-direction:column;gap:14px}
 .between{display:flex;align-items:center;justify-content:space-between}
 .row{display:flex;align-items:center;gap:10px}
-.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);font-weight:600}
+.eyebrow{font-family:var(--font);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700}
 .eyebrow.m{color:var(--mute);font-weight:400}
-.small{font-family:var(--mono);font-size:10.5px;color:var(--mute);line-height:1.65}
-.link{font-family:var(--mono);font-size:12px;color:var(--mute);display:inline-flex;align-items:center;gap:5px}
+.small{font-family:var(--font);font-size:10.5px;color:var(--mute);line-height:1.65}
+.link{font-family:var(--font);font-size:12px;color:var(--mute);display:inline-flex;align-items:center;gap:5px}
 .link:hover{color:var(--green)}
-h1.hero{font-weight:800;letter-spacing:-.035em;font-size:clamp(34px,8.5vw,52px);line-height:1;color:var(--green)}
+h1.hero{font-weight:700;letter-spacing:-.02em;font-size:clamp(26px,6.4vw,42px);line-height:1.08;color:var(--green);white-space:nowrap}
 h2.sc{font-weight:800;letter-spacing:-.025em;font-size:clamp(23px,5.5vw,30px);line-height:1.1;margin:5px 0 6px;color:var(--green)}
 .lede{color:var(--mute);font-size:14.5px;line-height:1.55;max-width:56ch}
 /* header band */
 .band{background:var(--green);border-radius:14px;padding:11px 15px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .band .lg{display:flex;align-items:center;gap:10px}
 .band .logo{height:30px;width:auto;display:block;border-radius:4px;background:#fff;padding:2px 4px}
-.band .badge{background:var(--gold);color:var(--green-dk);border-radius:5px;padding:3px 9px;font-weight:800;font-size:12.5px;letter-spacing:.04em}
+.band .badge{background:#FFFFFF;color:var(--green);border-radius:5px;padding:3px 9px;font-weight:800;font-size:12.5px;letter-spacing:.04em}
 .hero-logo{height:64px;width:auto;display:block;margin-bottom:16px;border-radius:6px}
-.band .ttl{color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
-.band .link{color:var(--gold)}
+.band .ttl{color:#fff;font-family:var(--font);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.band .link{color:#FFFFFF}
 .band .link:hover{color:#fff}
 /* footnote — the "what is this" box under each decision */
-.fn{background:var(--green-lt);border:1px solid #CBDCCE;border-left:3px solid var(--green);border-radius:10px;padding:12px 14px}
+.fn{background:var(--green-lt);border:1px solid #D6D6D6;border-left:3px solid var(--green);border-radius:10px;padding:12px 14px}
 .fn b{display:block;font-size:12.5px;color:var(--green);margin-bottom:4px;font-weight:700}
-.fn span{font-size:12.5px;color:#33463A;line-height:1.6}
+.fn span{font-size:12.5px;color:#000000;line-height:1.6}
 /* progress */
 .prog{display:flex;gap:5px;margin-bottom:16px}
 .prog i{flex:1;height:4px;border-radius:99px;background:var(--line)}
-.prog i.on{background:var(--gold)}
+.prog i.on{background:var(--green)}
 .prog i.done{background:var(--green)}
 /* buttons */
 .btn{display:block;width:100%;border-radius:11px;padding:14px 20px;font-weight:700;font-size:16px;background:var(--green);color:#fff;transition:transform .1s}
 .btn:active{transform:scale(.97)}
 .btn[disabled]{opacity:.35;cursor:not-allowed}
-.btn.gold{background:var(--gold);color:var(--green-dk)}
+.btn.gold{background:var(--green);color:#FFFFFF}
 .btn.ghost{background:var(--surface);border:1px solid var(--line);color:var(--green)}
 .btn.danger{background:var(--surface);border:1px solid var(--red);color:var(--red);font-size:15px}
 .nav{display:flex;gap:10px}
 .nav .btn{flex:1}
 .nav .btn.back{flex:0 0 30%}
-.field{width:100%;margin-top:7px;border-radius:11px;padding:13px 15px;background:var(--surface);border:1px solid var(--line);font-family:var(--mono);font-size:17px}
-.field::placeholder{color:#9AA79E}
+.field{width:100%;margin-top:7px;border-radius:11px;padding:13px 15px;background:var(--surface);border:1px solid var(--line);font-family:var(--font);font-size:17px}
+.field::placeholder{color:#5A5A5A}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border-radius:999px;padding:8px 15px;font-family:var(--mono);font-size:12px;border:1px solid var(--line);color:var(--mute);background:var(--surface)}
+.chip{border-radius:999px;padding:8px 15px;font-family:var(--font);font-size:12px;border:1px solid var(--line);color:var(--mute);background:var(--surface)}
 .chip.on{background:var(--green);border-color:var(--green);color:#fff}
 /* dial */
 .dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
-.dname{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-.dval{font-family:var(--mono);font-size:25px;font-weight:700}
-.dunit{font-family:var(--mono);font-size:11px;color:var(--mute);margin-left:4px}
+.dname{font-family:var(--font);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.dval{font-family:var(--font);font-size:25px;font-weight:700}
+.dunit{font-family:var(--font);font-size:11px;color:var(--mute);margin-left:4px}
 .step{flex:0 0 auto;border-radius:9px;padding:8px;background:var(--surf2);border:1px solid var(--line);display:flex}
 .step:active{transform:scale(.9)}
 input[type=range]{flex:1;height:26px;background:transparent;-webkit-appearance:none;appearance:none}
@@ -91,31 +91,31 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   text-align:left;display:flex;align-items:center;gap:8px}
 .hcard.on{background:var(--green-lt);border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
 .hcard .hleft{flex:1 1 auto;min-width:0}
-.hcard .co{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:block}
+.hcard .co{font-family:var(--font);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:block}
 .hcard .nm{font-weight:700;font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hcard .hmid{flex:0 0 auto;width:58px;text-align:center;
   border-left:1px solid var(--line);border-right:1px solid var(--line);padding:2px 0}
-.hcard.on .hmid{border-color:#BCD2C0}
-.hcard .crmv{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--gold-dk);display:block;line-height:1.1}
-.hcard .cap{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:block}
+.hcard.on .hmid{border-color:#D6D6D6}
+.hcard .crmv{font-family:var(--font);font-size:16px;font-weight:700;color:var(--green);display:block;line-height:1.1}
+.hcard .cap{font-family:var(--font);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:block}
 .hcard .hright{flex:0 0 auto;width:62px;text-align:right}
-.hcard .price{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--green);display:block;line-height:1.1}
+.hcard .price{font-family:var(--font);font-size:16px;font-weight:700;color:var(--green);display:block;line-height:1.1}
 /* months */
 .mrow{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line)}
 .mrow:last-child{border-bottom:none}
-.mrow .mo{font-family:var(--mono);font-size:11.5px;width:34px;flex:0 0 auto;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
-.mrow .amt{font-family:var(--mono);font-size:15px;font-weight:700;width:48px;text-align:right;flex:0 0 auto;color:var(--water)}
-.mrow .tgt{font-family:var(--mono);font-size:9px;color:var(--mute);width:44px;text-align:right;flex:0 0 auto}
+.mrow .mo{font-family:var(--font);font-size:11.5px;width:34px;flex:0 0 auto;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.mrow .amt{font-family:var(--font);font-size:15px;font-weight:700;width:48px;text-align:right;flex:0 0 auto;color:var(--ink)}
+.mrow .tgt{font-family:var(--font);font-size:9px;color:var(--mute);width:44px;text-align:right;flex:0 0 auto}
 .tot{display:flex;align-items:baseline;gap:7px}
-.tot b{font-family:var(--mono);font-size:29px;font-weight:700;color:var(--water)}
+.tot b{font-family:var(--font);font-size:29px;font-weight:700;color:var(--ink)}
 /* nitrogen bank */
 .bank{height:26px;border-radius:7px;overflow:hidden;display:flex;border:1px solid var(--line);background:var(--surf2)}
 .bank i{display:block;height:100%}
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px}
-.legend span{font-family:var(--mono);font-size:10.5px;color:var(--mute);display:flex;align-items:center;gap:5px}
+.legend span{font-family:var(--font);font-size:10.5px;color:var(--mute);display:flex;align-items:center;gap:5px}
 .legend em{width:9px;height:9px;border-radius:2px;display:inline-block;font-style:normal}
 /* table */
-.tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+.tbl{width:100%;border-collapse:collapse;font-family:var(--font);font-size:12.5px}
 .tbl td{padding:7px 0;border-bottom:1px solid var(--line)}
 .tbl td:last-child{text-align:right}
 .tbl td:first-child{color:var(--mute)}
@@ -124,16 +124,16 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 /* metrics */
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .metrics .panel{padding:12px}
-.mk{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.mv{font-family:var(--mono);font-size:21px;font-weight:700;margin-top:3px}
-.mu{font-family:var(--mono);font-size:9px;color:var(--mute)}
+.mk{font-family:var(--font);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.mv{font-family:var(--font);font-size:21px;font-weight:700;margin-top:3px}
+.mu{font-family:var(--font);font-size:9px;color:var(--mute)}
 .pivot-hold{position:relative;width:242px;height:242px;max-width:72vw;max-height:72vw;margin:0 auto}
 .pivot-hold svg{width:100%;height:100%;display:block}
 .readout{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
-.readout .y{font-family:var(--mono);font-weight:700;font-size:clamp(31px,11vw,44px);color:var(--green);line-height:1}
-.readout .u{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-top:4px}
-.tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:99px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
-.tag.ml{border-color:var(--gold-dk);color:var(--gold-dk);background:var(--gold-lt)}
+.readout .y{font-family:var(--font);font-weight:700;font-size:clamp(31px,11vw,44px);color:var(--green);line-height:1}
+.readout .u{font-family:var(--font);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.tag{font-family:var(--font);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:99px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.tag.ml{border-color:var(--green);color:var(--green);background:#FFFFFF}
 /* dice */
 .dice-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;padding:8px 0}
 .dice{width:118px;height:118px;border-radius:22px;background:var(--surface);border:2px solid var(--green);
@@ -147,34 +147,34 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   width:74px;height:74px;gap:4px}
 .dice .pips i{width:16px;height:16px;border-radius:50%;background:var(--green);align-self:center;justify-self:center}
 .rolled{text-align:center}
-.rolled .num{font-family:var(--mono);font-size:46px;font-weight:700;color:var(--nitro);line-height:1}
-.rolled .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:5px}
-.rolled .band-tag{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:11px;
-  padding:3px 11px;border-radius:99px;background:var(--gold-lt);border:1px solid var(--gold);color:var(--gold-dk)}
+.rolled .num{font-family:var(--font);font-size:46px;font-weight:700;color:var(--ink);line-height:1}
+.rolled .lbl{font-family:var(--font);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:5px}
+.rolled .band-tag{display:inline-block;margin-top:9px;font-family:var(--font);font-size:11px;
+  padding:3px 11px;border-radius:99px;background:var(--green-lt);border:1px solid var(--green);color:var(--green)}
 /* board */
 .tabs{display:flex;gap:6px}
-.tabs button{flex:1;border-radius:10px;padding:9px 4px;font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);color:var(--mute);background:var(--surface)}
+.tabs button{flex:1;border-radius:10px;padding:9px 4px;font-family:var(--font);font-size:11.5px;border:1px solid var(--line);color:var(--mute);background:var(--surface)}
 .tabs button.on{background:var(--green);border-color:var(--green);color:#fff}
 .lb{display:flex;align-items:center;gap:12px;padding:12px 10px;border-bottom:1px solid var(--line)}
 .lb:last-child{border-bottom:none}
-.lb.me{background:var(--gold-lt);border-radius:10px;box-shadow:inset 0 0 0 1px var(--gold)}
-.lb .r{font-family:var(--mono);font-size:14px;font-weight:800;width:30px;flex:0 0 auto;color:var(--mute);text-align:center}
+.lb.me{background:var(--green-lt);border-radius:8px;box-shadow:inset 0 0 0 1px var(--green)}
+.lb .r{font-family:var(--font);font-size:14px;font-weight:800;width:30px;flex:0 0 auto;color:var(--mute);text-align:center}
 .lb .r.medal{width:30px;height:30px;line-height:30px;border-radius:50%;color:#fff;font-size:13px}
 .lb .who{flex:1;min-width:0}
 .lb .who b{font-weight:700;font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lb .sub{font-family:var(--mono);font-size:9.5px;color:var(--mute);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.lb .sub{font-family:var(--font);font-size:9.5px;color:var(--mute);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .lb .v{text-align:right;flex:0 0 auto}
-.lb .v b{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--green);display:block;line-height:1.1}
-.lb .v span{font-family:var(--mono);font-size:9px;color:var(--mute);text-transform:lowercase}
+.lb .v b{font-family:var(--font);font-size:17px;font-weight:700;color:var(--green);display:block;line-height:1.1}
+.lb .v span{font-family:var(--font);font-size:9px;color:var(--mute);text-transform:lowercase}
 .lbhead{display:flex;align-items:center;gap:12px;padding:6px 10px 8px}
 .lbhead .r{width:30px;flex:0 0 auto}
 .lbhead .who{flex:1}
-.lbhead span{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.empty{text-align:center;padding:38px 12px;font-family:var(--mono);font-size:12px;color:var(--mute);line-height:1.7}
+.lbhead span{font-family:var(--font);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.empty{text-align:center;padding:38px 12px;font-family:var(--font);font-size:12px;color:var(--mute);line-height:1.7}
 /* modal */
 .scrim{position:fixed;inset:0;z-index:50;background:rgba(20,40,26,.55);display:flex;align-items:center;justify-content:center;padding:18px}
 .sheet{width:100%;max-width:560px;max-height:86vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
-.sheet p{font-size:13px;color:#39463D;line-height:1.7;margin-bottom:11px}
+.sheet p{font-size:13px;color:#000000;line-height:1.7;margin-bottom:11px}
 @media (min-width:880px){
   body{padding:24px 24px 60px}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
@@ -304,7 +304,7 @@ const SOIL = { min:60, max:360, dflt:null };
 const SEASON_YEAR = 2024;  // a normal Colorado season. 2025 was drought-hit
                            // and its plots averaged 44 bu/ac less.
 const N_REF = 110;
-/* TAPS plots ranged from 4.1 to 19.3 inches. Past that the trees have no data
+/* TAPS plots ranged from 4.1 to 19.3 in. Past that the trees have no data
    and simply repeat their last leaf value, which drifts upward and would reward
    a participant for over-watering. The model input is capped at the top of the
    training range: extra water still costs money and still drags WUE down, it
@@ -386,7 +386,7 @@ const BUDGET = {
   overhead:        12.42,
   cashRent:       180.00,
   /* the participant's irrigation is converted to events at this depth */
-  inchesPerEvent:   1.20,
+  inPerEvent:   1.20,
 };
 /* ownership (capital) share of each field operation, $/ac. Interest is charged
    only on cash expenses, so these are subtracted from the interest base — this
@@ -405,7 +405,7 @@ const FERT_TIMINGS = { 3:["V8","V12","R1"], 4:["V8","V12","Tassel","R1"] };
 
 function farmBudget(st, yieldBu, totalIrr, appliedSide, appliedFert){
   const B = BUDGET;
-  const irrEvents = Math.max(0, Math.round(totalIrr/B.inchesPerEvent));
+  const irrEvents = Math.max(0, Math.round(totalIrr/B.inPerEvent));
   const prePlantOn = st.nPre > 0;
   const timings = FERT_TIMINGS[st.nEvents] || FERT_TIMINGS[4];
   const fertEach = appliedFert>0 ? appliedFert/timings.length : 0;
@@ -495,7 +495,7 @@ function rawPredict(soilN, totalIrr, pop, crm){
    the trend the model learned and removes the cliffs, without inventing any
    agronomy of its own. */
 const SMOOTH_POP = 2000;   // seeds/ac, half-width
-const SMOOTH_IRR = 1.0;    // inches, half-width
+const SMOOTH_IRR = 1.0;    // in, half-width
 function modelPredict(totalIrr, crm, soilN, pop){
   const L = MODEL.limits;
   // Clamp BEFORE smoothing. If we smoothed first, a request past the top of the
@@ -581,7 +581,7 @@ function welcome(){
     <div>
       <img class="hero-logo" src="logo.png" alt="CSU-TAPS" onerror="this.style.display='none'">
       <div class="eyebrow">CSU-TAPS &middot; Ag Fest</div>
-      <h1 class="hero">Virtual Farm<br>Competition</h1>
+      <h1 class="hero">Virtual Farm Competition</h1>
       <p class="lede" style="margin-top:12px">You get six decisions on one acre of Colorado corn: your soil
       nitrogen, the hybrid, how thick to plant it, how much nitrogen and when, and how much water each
       month. Then we settle up &mdash; your yield, how efficiently you used nitrogen and water, and what
@@ -589,17 +589,17 @@ function welcome(){
     <div class="panel pad">
       <div class="eyebrow m">Scored on</div>
       <table class="tbl" style="margin-top:8px">
-        <tr><td>Yield</td><td>bushels per acre</td></tr>
-        <tr><td>NUE &mdash; nitrogen use efficiency</td><td>bu per lb N applied</td></tr>
-        <tr><td>WUE &mdash; water use efficiency</td><td>bu per inch applied</td></tr>
-        <tr><td>Cost of production</td><td>dollars per acre</td></tr>
+        <tr><td>Yield</td><td>bushels /ac</td></tr>
+        <tr><td>NUE &mdash; nitrogen use efficiency</td><td>bu/lb N applied</td></tr>
+        <tr><td>WUE &mdash; water use efficiency</td><td>bu/in applied</td></tr>
+        <tr><td>Cost of production</td><td>dollars /ac</td></tr>
       </table></div>
     <div><div class="eyebrow m">Your name for the board</div>
       <input class="field" id="nameIn" maxlength="18" placeholder="Type a name" value="${esc(S.name)}"></div>
     <div class="chips">${groups.map(g=>`<button class="chip${S.group===g?' on':''}" data-group="${g}">${g}</button>`).join('')}</div>
     <div class="small">Entries are saved on this device, so the board belongs to this booth.</div>
     <button class="btn" data-go="soil" id="startBtn"${S.name.trim()?'':' disabled'}>Start farming ${icon("right","#fff",16)}</button>
-    <button class="btn ghost" data-go="board">${icon("trophy","var(--gold-dk)",16)} Leaderboard</button></div>`;
+    <button class="btn ghost" data-go="board">${icon("trophy","var(--green)",16)} Leaderboard</button></div>`;
 }
 
 function pips(n){
@@ -628,7 +628,7 @@ function soilScreen(){
         ${rolled ? `
           <div class="rolled">
             <div class="num">${S.soilN}</div>
-            <div class="lbl">lb/ac residual nitrate, 0&ndash;24 in</div>
+            <div class="lbl">lb/ac residual nitrate, 0-24 in</div>
             <div class="band-tag">${band[0]} for a TAPS field</div>
           </div>
           <div class="small" style="text-align:center;max-width:38ch">${band[1]}</div>`
@@ -653,7 +653,7 @@ function hybridScreen(){
     <div class="hgrid">${hs.map(h=>`<button class="hcard${S.hybrid===h.name?' on':''}" data-hyb="${esc(h.name)}">
       <span class="hleft"><span class="co">${h.company}</span><span class="nm">${esc(h.name)}</span></span>
       <span class="hmid"><span class="crmv">${h.crm}</span><span class="cap">CRM</span></span>
-      <span class="hright"><span class="price">$${bagPrice(h.name).toFixed(0)}</span><span class="cap">per bag</span></span>
+      <span class="hright"><span class="price">$${bagPrice(h.name).toFixed(0)}</span><span class="cap">/bag</span></span>
       </button>`).join('')}</div>
     <div class="small">Bag prices are what TAPS growers actually paid in 2025, from $264 to $358.
     A bag holds 80,000 seeds, so at 33,000 seeds an acre that spread is worth about $39 an acre.</div>
@@ -664,14 +664,14 @@ function hybridScreen(){
 function seedScreen(){
   return `<div class="narrow">${progress()}<div class="stack">
     <div><div class="eyebrow">Decision 3 of 6</div><h2 class="sc">Set your seeding rate</h2>
-      <p class="lede">How many seeds go in the ground per acre.</p></div>
+      <p class="lede">How many seeds go in the ground /ac.</p></div>
     ${dial({key:"pop",label:"Seeding rate",unit:"seeds/ac",value:S.pop,display:(S.pop/1000).toFixed(0)+"k",
-      min:MODEL.limits.pop[0],max:MODEL.limits.pop[1],step:1000,color:"var(--stand)",
+      min:MODEL.limits.pop[0],max:MODEL.limits.pop[1],step:1000,color:"var(--green)",
       hint:"TAPS growers planted between "+(MODEL.limits.pop[0]/1000)+"k and "+(MODEL.limits.pop[1]/1000)+"k seeds an acre across 2024 and 2025. The model learned from that whole range."})}
     <div class="panel pad between"><div><div class="eyebrow m">Seed cost</div>
       <div class="mono" style="font-size:22px;font-weight:700;margin-top:3px" id="seedCost">$${((S.pop/BUDGET.seedsPerBag)*BUDGET.seedPerBag).toFixed(0)}<span class="dunit">/ac</span></div></div>
-      <div class="small" style="text-align:right">$${BUDGET.seedPerBag.toFixed(0)} per 80,000-seed bag<br>TAPS 2026 price</div></div>
-    ${fn("Why not just plant more?","Every extra plant is another mouth drinking from the same water. Plant too thin and you leave sunlight unused; plant too thick and they compete with each other, ears get smaller, and you have paid for seed that produced nothing. Seed is also one of your biggest bills &mdash; at $${bagPrice(S.hybrid).toFixed(0)} a bag, every extra 1,000 seeds costs you $${(bagPrice(S.hybrid)/80).toFixed(2)} an acre.")}
+      <div class="small" style="text-align:right">$${BUDGET.seedPerBag.toFixed(0)} /80,000-seed bag<br>TAPS 2026 price</div></div>
+    ${fn("Why not just plant more?","Every extra plant is another mouth drinking from the same water. Plant too thin and you leave sunlight unused; plant too thick and they compete with each other, ears get smaller, and you have paid for seed that produced nothing. Seed is also one of your biggest bills &mdash; at $${bagPrice(S.hybrid).toFixed(0)} a bag, every extra 1,000 seeds costs you $${(bagPrice(S.hybrid)/80).toFixed(2)}/ac.")}
     ${nav("hybrid","nitrogen")}</div></div>`;
 }
 
@@ -686,26 +686,26 @@ function nitrogenScreen(){
       during the season.</p></div>
     <div class="panel pad">
       <div class="between"><span class="eyebrow m">Nitrogen in the bank</span>
-        <span class="mono" style="font-size:20px;font-weight:700;color:var(--nitro)" id="nAvail">${avail.toFixed(0)}<span class="dunit">lb/ac available</span></span></div>
+        <span class="mono" style="font-size:20px;font-weight:700;color:var(--ink)" id="nAvail">${avail.toFixed(0)}<span class="dunit">lb/ac available</span></span></div>
       <div class="bank" style="margin-top:10px">
-        <i id="bkSoil" style="width:${100*S.soilN/scale}%;background:#8A6B3A"></i>
-        <i id="bkBag" style="width:${100*fromBag/scale}%;background:var(--nitro)"></i></div>
-      <div class="legend"><span><em style="background:#8A6B3A"></em>From your soil &mdash; <b id="soilLb">${S.soilN}</b> lb</span>
-        <span><em style="background:var(--nitro)"></em>From the bag &mdash; <b id="bagLb">${fromBag.toFixed(0)}</b> lb taken up</span></div>
+        <i id="bkSoil" style="width:${100*S.soilN/scale}%;background:#000000"></i>
+        <i id="bkBag" style="width:${100*fromBag/scale}%;background:var(--green)"></i></div>
+      <div class="legend"><span><em style="background:#000000"></em>From your soil &mdash; <b id="soilLb">${S.soilN}</b> lb</span>
+        <span><em style="background:var(--green)"></em>From the bag &mdash; <b id="bagLb">${fromBag.toFixed(0)}</b> lb taken up</span></div>
     </div>
-    ${dial({key:"nPre",label:"Pre-plant",unit:"lb/ac",value:S.nPre,display:S.nPre,min:0,max:30,step:10,color:"var(--nitro)",
-      hint:"Comes in the pre-plant mix with phosphorus, worked in before the planter runs. The full package is 30 lb N per acre."})}
-    ${dial({key:"nSide",label:"Side-dress",unit:"lb/ac",value:S.nSide,display:S.nSide,min:0,max:250,step:25,color:"var(--nitro)",
+    ${dial({key:"nPre",label:"Pre-plant",unit:"lb/ac",value:S.nPre,display:S.nPre,min:0,max:30,step:10,color:"var(--ink)",
+      hint:"Comes in the pre-plant mix with phosphorus, worked in before the planter runs. The full package is 30 lb N /ac."})}
+    ${dial({key:"nSide",label:"Side-dress",unit:"lb/ac",value:S.nSide,display:S.nSide,min:0,max:250,step:25,color:"var(--ink)",
       hint:"Knifed in beside the row when the corn is knee-high. Applied in 25 lb steps."})}
-    ${dial({key:"nFert",label:"Fertigation total",unit:"lb/ac",value:S.nFert,display:S.nFert,min:0,max:50,step:10,color:"var(--nitro)"})}
+    ${dial({key:"nFert",label:"Fertigation total",unit:"lb/ac",value:S.nFert,display:S.nFert,min:0,max:50,step:10,color:"var(--ink)"})}
     <div class="panel pad"><div class="eyebrow m">Split the fertigation into</div>
       <div class="chips" style="margin-top:10px">
         ${[3,4].map(n=>`<button class="chip${S.nEvents===n?' on':''}" data-ev="${n}">${n} applications</button>`).join('')}
-        <span class="small" style="align-self:center">$${BUDGET.fertigationApp.toFixed(2)} per pass</span></div>
+        <span class="small" style="align-self:center">$${BUDGET.fertigationApp.toFixed(2)} /pass</span></div>
       <div class="small" style="margin-top:9px">TAPS times fertigation at V8, V12, tassel and R1. More, smaller
       doses track the crop's appetite and less nitrogen escapes &mdash; but each pass costs money. Splitting pays
       when nitrogen is tight and wastes money when you have already applied plenty.</div></div>
-    ${fn("How much does the crop need?","About 1.1 lb of nitrogen for every bushel you want &mdash; roughly 220 lb for a 200 bushel crop. Your soil test is already covering part of that. Fill the gap and yield climbs; go past it and yield flattens while the bill keeps rising. Nitrogen costs $"+BUDGET.nPerLb.toFixed(2)+" per pound at side-dress and fertigation.")}
+    ${fn("How much does the crop need?","About 1.1 lb of nitrogen for every bushel you want &mdash; roughly 220 lb for a 200 bushel crop. Your soil test is already covering part of that. Fill the gap and yield climbs; go past it and yield flattens while the bill keeps rising. Nitrogen costs $"+BUDGET.nPerLb.toFixed(2)+" /lb at side-dress and fertigation.")}
     ${nav("seed","water")}</div></div>`;
 }
 
@@ -713,25 +713,25 @@ function waterScreen(){
   const tot=MONTHS.reduce((a,m)=>a+S.irr[m.key],0);
   return `<div class="narrow">${progress()}<div class="stack">
     <div><div class="eyebrow">Decision 5 of 6</div><h2 class="sc">Irrigate, month by month</h2>
-      <p class="lede">Set inches of water for each month. What counts is the season total.</p></div>
+      <p class="lede">Set in of water for each month. What counts is the season total.</p></div>
     <div class="panel pad">
       <div class="between" style="margin-bottom:8px"><span class="eyebrow m">Season total</span></div>
-      <div class="tot" style="margin-bottom:12px"><b id="irrTot">${tot.toFixed(1)}</b><span class="dunit">inches</span>
+      <div class="tot" style="margin-bottom:12px"><b id="irrTot">${tot.toFixed(1)}</b><span class="dunit">in</span>
         <span class="small" id="irrCost" style="margin-left:auto">$${(tot*BUDGET.waterPerIn).toFixed(0)}/ac of water and power</span></div>
       ${MONTHS.map(m=>`<div class="mrow"><span class="mo">${m.label}</span>
         <button class="step" data-bump="irr.${m.key}" data-dir="-1" aria-label="less">${icon("minus","var(--ink)",15)}</button>
-        <input type="range" id="r-irr.${m.key}" data-slide="irr.${m.key}" min="0" max="${m.max}" step="0.5" value="${S.irr[m.key]}" style="--c:var(--water)">
+        <input type="range" id="r-irr.${m.key}" data-slide="irr.${m.key}" min="0" max="${m.max}" step="0.5" value="${S.irr[m.key]}" style="--c:var(--ink)">
         <button class="step" data-bump="irr.${m.key}" data-dir="1" aria-label="more">${icon("plus","var(--ink)",15)}</button>
         <span class="amt" id="v-irr.${m.key}">${S.irr[m.key].toFixed(1)}"</span></div>`).join('')}
     </div>
-    <div class="panel pad" id="extraWarn" style="display:${tot>19.3?'block':'none'};border-color:var(--nitro)">
-      <div class="eyebrow m" style="color:var(--nitro)">Past the edge of the data</div>
-      <div class="small" style="margin-top:5px">TAPS plots ran from 4.1 to 19.3 inches, so that is as far as
+    <div class="panel pad" id="extraWarn" style="display:${tot>19.3?'block':'none'};border-color:var(--ink)">
+      <div class="eyebrow m" style="color:var(--ink)">Past the edge of the data</div>
+      <div class="small" style="margin-top:5px">TAPS plots ran from 4.1 to 19.3 in, so that is as far as
       the model can see. Water beyond 19.3 in still costs you, still drags your WUE down, and starts leaching
       nitrogen past the roots &mdash; it will not buy you bushels.</div></div>
     <div class="panel pad"><div class="eyebrow m">What the crop is doing</div>
       <div style="margin-top:9px">${MONTHS.map(m=>`<div class="small" style="margin-bottom:6px"><b style="color:var(--green)">${m.label}</b> &mdash; ${m.note}</div>`).join('')}</div></div>
-    ${fn("Only the total goes into the model","The TAPS records show a season total for each plot, not a running diary of when each inch went on. So the model can learn how much water matters, but it has no way to learn when. Spread your inches across the months however you like &mdash; the prediction depends on what they add up to.")}
+    ${fn("Only the total goes into the model","The TAPS records show a season total for each plot, not a running diary of when each inch went on. So the model can learn how much water matters, but it has no way to learn when. Spread your in across the months however you like &mdash; the prediction depends on what they add up to.")}
     ${nav("nitrogen","budget","Cost of production")}</div></div>`;
 }
 
@@ -753,8 +753,8 @@ function budgetScreen(){
         ${line("Interest on operating capital, 6.5% for 6 months",c.interest)}
         ${line("Overhead",c.overhead)}
         ${line("Cash rent",c.cashRent)}
-        <tr class="sum"><td>Total cost per acre</td><td>$${c.total.toFixed(2)}</td></tr></table></div>
-    ${fn("Cost per acre is only half the story","Two growers can spend the same $900 an acre and finish in completely different places, because what matters is what that money grew. Divide your total cost by your yield and you get cost per bushel &mdash; the number that says whether the spending was worth it. You will see both once the crop is in.")}
+        <tr class="sum"><td>Total cost /ac</td><td>$${c.total.toFixed(2)}</td></tr></table></div>
+    ${fn("Cost /ac is only half the story","Two growers can spend the same $900 an acre and finish in completely different places, because what matters is what that money grew. Divide your total cost by your yield and you get cost /bu &mdash; the number that says whether the spending was worth it. You will see both once the crop is in.")}
     <div class="nav"><button class="btn ghost back" data-go="water">${icon("left","var(--green)",15)}</button>
       <button class="btn gold" data-go="result">Grow the crop</button></div></div></div>`;
 }
@@ -793,27 +793,27 @@ function runPivot(instant){
 function resultScreen(){
   const r=S.result,c=r.cost,win=r.profit>=0;
   const left=`<div class="stack">
-    <div class="pivot-hold">${pivotSVG()}<div class="readout"><div class="y" id="yNum">0</div><div class="u">bu / acre</div></div></div>
+    <div class="pivot-hold">${pivotSVG()}<div class="readout"><div class="y" id="yNum">0</div><div class="u">bu/ac</div></div></div>
     <div id="reveal" style="opacity:0;transition:opacity .5s;text-align:center">
       <div style="font-weight:800;font-size:21px;letter-spacing:-.02em;color:var(--green)">
         ${esc(r.hybrid.company)} ${esc(r.hybrid.name)}, CRM ${r.hybrid.crm}</div>
       <div class="small">soil rolled ${S.soilN} &middot; ${r.appliedN} lb N applied &middot; ${r.totalIrr.toFixed(1)} in water &middot; ${(S.pop/1000).toFixed(0)}k seeds</div></div>
     <div class="metrics">
       ${[["Yield",r.yieldBu.toFixed(0),"bu/ac","var(--green)"],
-         ["NUE",r.nue===null?"&mdash;":r.nue.toFixed(2),"bu/lb N","var(--nitro)"],
-         ["WUE",r.wue===null?"&mdash;":r.wue.toFixed(1),"bu/in","var(--water)"],
-         ["Profit",(r.profit>=0?"$":"-$")+Math.abs(r.profit).toFixed(0),"per ac",win?"var(--stand)":"var(--red)"]]
+         ["NUE",r.nue===null?"&mdash;":r.nue.toFixed(2),"bu/lb N","var(--ink)"],
+         ["WUE",r.wue===null?"&mdash;":r.wue.toFixed(1),"bu/in","var(--ink)"],
+         ["Profit",(r.profit>=0?"$":"-$")+Math.abs(r.profit).toFixed(0),"$/ac",win?"var(--green)":"var(--red)"]]
         .map(([k,v,u,col])=>`<div class="panel"><div class="mk">${k}</div><div class="mv" style="color:${col}">${v}</div><div class="mu">${u}</div></div>`).join('')}
     </div>
   </div>`;
   const right=`<div class="stack">
     <div class="panel pad"><div class="eyebrow m">Your numbers</div>
       <table class="tbl" style="margin-top:10px">
-        <tr><td><b style="color:var(--green)">Yield</b><br><span class="small">How much corn the acre grew.</span></td>
+        <tr><td><b>Yield</b><br><span class="small">How much corn the acre grew.</span></td>
             <td style="vertical-align:top"><b>${r.yieldBu.toFixed(1)}</b><br><span class="small">bu/ac</span></td></tr>
-        <tr><td><b style="color:var(--nitro)">NUE</b><br><span class="small">Bushels grown for each pound of nitrogen you applied. Nitrogen cost you $${c.nCost.toFixed(0)} an acre, so a higher NUE means each of those dollars bought more grain.</span></td>
+        <tr><td><b>NUE</b><br><span class="small">Bushels grown for each pound of nitrogen you applied. Nitrogen cost you $${c.nCost.toFixed(0)} /ac, so a higher NUE means each of those dollars bought more grain.</span></td>
             <td style="vertical-align:top"><b>${r.nue===null?"&mdash;":r.nue.toFixed(2)}</b><br><span class="small">bu/lb N</span></td></tr>
-        <tr><td><b style="color:var(--water)">WUE</b><br><span class="small">Bushels grown for each inch of water you applied. Water cost you $${c.waterCost.toFixed(0)} an acre plus the pumping passes, so a higher WUE means cheaper bushels.</span></td>
+        <tr><td><b>WUE</b><br><span class="small">Bushels grown for each inch of water you applied. Water cost you $${c.waterCost.toFixed(0)} /ac plus the pumping passes, so a higher WUE means cheaper bushels.</span></td>
             <td style="vertical-align:top"><b>${r.wue===null?"&mdash;":r.wue.toFixed(2)}</b><br><span class="small">bu/in</span></td></tr>
       </table></div>
     <div class="panel pad"><div class="eyebrow m">Cost and profit</div>
@@ -822,18 +822,17 @@ function resultScreen(){
         <tr><td>Field operations</td><td>&minus;$${c.opsTotal.toFixed(2)}</td></tr>
         <tr><td>Materials and services</td><td>&minus;$${c.matsTotal.toFixed(2)}</td></tr>
         <tr><td>Interest, overhead and cash rent</td><td>&minus;$${(c.interest+c.overhead+c.cashRent).toFixed(2)}</td></tr>
-        <tr class="sum"><td>Profit per acre</td><td style="color:${win?'var(--stand)':'var(--red)'}">${r.profit>=0?"$":"-$"}${Math.abs(r.profit).toFixed(2)}</td></tr>
+        <tr class="sum"><td>Profit</td><td style="color:${win?'var(--green)':'var(--red)'}">${r.profit>=0?"$":"-$"}${Math.abs(r.profit).toFixed(2)}</td></tr>
       </table>
       <table class="tbl" style="margin-top:12px">
-        <tr><td>Cost per acre</td><td><b>$${c.total.toFixed(2)}</b></td></tr>
-        <tr><td>Cost per bushel</td><td><b>$${c.perBushel===null?"&mdash;":c.perBushel.toFixed(2)}</b></td></tr>
+        <tr><td>Cost /ac</td><td><b>$${c.total.toFixed(2)}</b></td></tr>
         <tr><td>Break-even yield at $${CORN_PRICE.toFixed(2)}</td><td>${(c.total/CORN_PRICE).toFixed(0)} bu/ac</td></tr>
       </table></div>
-    ${fn("Efficiency and money are the same story","NUE and WUE both go up when you get more grain from less input &mdash; and that is exactly what pushes cost per bushel down. The catch is that they also look good when you buy almost nothing and grow almost nothing, because the fixed costs of rent, herbicide and harvest land on you either way. Profit is the referee: it only rewards efficiency that came with a crop attached.")}
+    ${fn("Efficiency and money are the same story","NUE and WUE both go up when you get more grain from less input &mdash; and that is exactly what pushes cost /bu down. The catch is that they also look good when you buy almost nothing and grow almost nothing, because the fixed costs of rent, herbicide and harvest land on you either way. Profit is the referee: it only rewards efficiency that came with a crop attached.")}
     ${S.saved
-      ? `<div class="panel pad" style="text-align:center;background:var(--gold-lt);border-color:var(--gold)">
+      ? `<div class="panel pad" style="text-align:center;background:var(--green-lt);border-color:var(--green)">
            <div style="font-weight:800;font-size:17px;color:var(--green)">You're #${S.rank} on the yield board</div></div>
-         <button class="btn ghost" data-go="board">${icon("trophy","var(--gold-dk)",16)} See the leaderboard</button>`
+         <button class="btn ghost" data-go="board">${icon("trophy","var(--green)",16)} See the leaderboard</button>`
       : `<button class="btn" id="postBtn">Post my result</button>`}
     <button class="btn ghost" id="xlBtn">${icon("down","var(--green)",16)} Download my results (Excel)</button></div>`;
   return `<div class="two">${left}${right}</div>`;
@@ -847,7 +846,7 @@ function boardScreen(){
            {id:"nue",   label:"NUE",    g:e=>e.nue==null?-1:e.nue, f:v=>v<0?"—":v.toFixed(2), u:"bu/lb N", hi:true},
            {id:"wue",   label:"WUE",    g:e=>e.wue==null?-1:e.wue, f:v=>v<0?"—":v.toFixed(1), u:"bu/in",   hi:true},
            {id:"profit",label:"Profit", g:e=>e.profit,  f:v=>(v>=0?"$":"-$")+Math.abs(v).toFixed(0), u:"$/ac", hi:true},
-           {id:"cost",  label:"$/bu",   g:e=>e.perBu==null?1e9:e.perBu, f:v=>v>=1e9?"—":"$"+v.toFixed(2), u:"$/bu", hi:false}];
+           {id:"cost",  label:"Cost",   g:e=>e.cTotal, f:v=>"$"+v.toFixed(0), u:"$/ac", hi:false}];
   const t=T.find(x=>x.id===S.tab)||T[0];
   const rows=rows0.slice().sort((a,b)=>t.hi?t.g(b)-t.g(a):t.g(a)-t.g(b)).slice(0,50);
   const medal=["#C8A22C","#8E9A9F","#A9702F"];
@@ -864,7 +863,7 @@ function boardScreen(){
     const isMe = e.id===S.lastId;
     const rank = S.adminView
       ? `<span class="r${i<3?' medal':''}" style="${i<3?'background:'+medal[i]+';color:#fff':''}">${i+1}</span>`
-      : `<span class="r">${icon("trophy","var(--gold-dk)",15)}</span>`;
+      : `<span class="r">${icon("trophy","var(--green)",15)}</span>`;
     return `<div class="lb${isMe&&S.adminView?' me':''}">${rank}
       <span class="who"><b>${esc(e.name)}</b>
         <span class="sub">${esc(e.hybrid)} &middot; CRM ${e.crm} &middot; soil ${e.soilN} &middot; ${e.n} lb N &middot; ${e.irr.toFixed(1)} in &middot; ${(e.pop/1000).toFixed(0)}k</span></span>
@@ -903,7 +902,7 @@ function budgetRows(r,name){
     ["Pre-plant N (lb/ac)",S.nPre],["Side-dress N (lb/ac)",S.nSide],
     ["Fertigation N (lb/ac)",S.nFert],["Fertigation applications",S.nEvents],
     ["Total N applied (lb/ac)",r.appliedN],[],
-    ["IRRIGATION BY MONTH (inches)"],
+    ["IRRIGATION BY MONTH (in)"],
     ...MONTHS.map(m=>[m.label,+(S.irr[m.key]||0).toFixed(2)]),
     ["Season total (in)",+r.totalIrr.toFixed(2)],
     ["Irrigation events",c.irrEvents],[],
@@ -919,10 +918,9 @@ function budgetRows(r,name){
     ["= Final yield",+r.yieldBu.toFixed(1)],[],
     ["RESULTS"],
     ["Yield (bu/ac)",+r.yieldBu.toFixed(1)],
-    ["NUE (bu per lb N applied)",r.nue==null?"n/a":+r.nue.toFixed(3)],
-    ["WUE (bu per inch)",r.wue==null?"n/a":+r.wue.toFixed(2)],
+    ["NUE (bu/lb N applied)",r.nue==null?"n/a":+r.nue.toFixed(3)],
+    ["WUE (bu/in)",r.wue==null?"n/a":+r.wue.toFixed(2)],
     ["Cost of production ($/ac)",+c.total.toFixed(2)],
-    ["Cost of production ($/bu)",c.perBushel==null?"n/a":+c.perBushel.toFixed(3)],
     ["Corn price ($/bu)",CORN_PRICE],
     ["Revenue ($/ac)",+r.revenue.toFixed(2)],
     ["Profit ($/ac)",+r.profit.toFixed(2)],[],
@@ -950,7 +948,7 @@ function exportAll(){
     "Attainable_bu","N_factor","Wet_factor","Yield_bu",
     "NUE_bu_per_lb","WUE_bu_per_in",
     "Cost_fieldops","Cost_materials","Cost_interest","Cost_overhead","Cost_rent",
-    "Cost_total_per_ac","Cost_per_bu","Revenue_usd","Profit_usd","Timestamp"];
+    "Cost_total_usd_per_ac","Revenue_usd_per_ac","Profit_usd_per_ac","Timestamp"];
   const sorted=all.slice().sort((a,b)=>b.yieldBu-a.yieldBu);
   const rows=[head,...sorted.map((e,i)=>[i+1,e.name,e.group,e.soilN,e.company,e.hybrid,e.crm,e.pop,
     e.bag,e.nPre,e.nSide,e.nFert,e.nEvents,e.n,
@@ -959,7 +957,7 @@ function exportAll(){
     +e.attainable.toFixed(1),+e.fN.toFixed(4),+e.wet.toFixed(4),+e.yieldBu.toFixed(1),
     e.nue==null?"":+e.nue.toFixed(3),e.wue==null?"":+e.wue.toFixed(2),
     +e.cOps.toFixed(2),+e.cMats.toFixed(2),+e.cInt.toFixed(2),+e.cOver.toFixed(2),+e.cRent.toFixed(2),
-    +e.cTotal.toFixed(2),e.perBu==null?"":+e.perBu.toFixed(3),+e.revenue.toFixed(2),+e.profit.toFixed(2),new Date(e.ts).toISOString()])];
+    +e.cTotal.toFixed(2),+e.revenue.toFixed(2),+e.profit.toFixed(2),new Date(e.ts).toISOString()])];
   const pick=(arr,key,hi)=>{const w=arr.filter(x=>x[key]!=null).sort((a,b)=>hi?b[key]-a[key]:a[key]-b[key])[0];
     return w?[w.name,+w[key].toFixed(3)]:["—",""];};
   const avg=k=>all.length?+(all.reduce((a,e)=>a+e[k],0)/all.length).toFixed(2):"";
@@ -967,15 +965,14 @@ function exportAll(){
     ["Entries",all.length],["Exported",new Date().toLocaleString()],[],
     ["CATEGORY WINNERS"],
     ["Highest yield (bu/ac)",...pick(all,"yieldBu",true)],
-    ["Best NUE (bu per lb N)",...pick(all,"nue",true)],
-    ["Best WUE (bu per inch)",...pick(all,"wue",true)],
+    ["Best NUE (bu/lb N)",...pick(all,"nue",true)],
+    ["Best WUE (bu/in)",...pick(all,"wue",true)],
     ["Highest profit",...pick(all,"profit",true)],
-    ["Lowest cost per bushel",...pick(all,"perBu",false)],
-    ["Lowest cost per acre",...pick(all,"cTotal",false)],[],
+    ["Lowest cost /ac",...pick(all,"cTotal",false)],[],
     ["AVERAGES"],
     ["Yield (bu/ac)",avg("yieldBu")],["Soil nitrate (lb/ac)",avg("soilN")],
     ["N applied (lb/ac)",avg("n")],["Irrigation (in)",avg("irr")],
-    ["Cost per acre ($)",avg("cTotal")],["Profit ($/ac)",avg("profit")]];
+    ["Cost /ac ($)",avg("cTotal")],["Profit ($/ac)",avg("profit")]];
   dl(buildXlsx([{name:"Summary",rows:summary},{name:"Entries",rows}]),"csu_ag_fest_results.xlsx");
 }
 
@@ -984,30 +981,17 @@ function openAbout(){
   modal.innerHTML=`<div class="scrim"><div class="sheet">
     <div class="between" style="margin-bottom:14px"><span class="eyebrow">How it works</span>
       <button data-close="1">${icon("x","var(--mute)",18)}</button></div>
-    <p>Yield comes from a machine-learning model built by the CSU AI Team for the TAPS precision corn
-    competition &mdash; 200 gradient-boosted trees trained on ${MODEL.metrics.n} real plot-years from the 2024 and
-    2025 seasons, validated by 5-fold cross-validation grouped on plot identity
-    (R&sup2; = ${MODEL.metrics.r2}, RMSE = ${MODEL.metrics.rmse} bu/ac). The whole model runs inside this page.
-    No server, no internet.</p>
-    <p>The model responds to <b>total irrigation, hybrid maturity (CRM), soil nitrate and season</b>. Two
-    things are added on top of it, from published agronomy, because the model could not learn them from
-    the data:</p>
-    <p><b>Nitrogen.</b> Every TAPS plot already carried around 300 lb/ac of available nitrogen, well past
-    what the crop could use, so the trees never saw a hungry crop. Here nitrogen works the way it does in
-    the field: your soil test plus the share of your fertiliser the crop recovers, against about 1.1 lb of
-    N per bushel.</p>
-    <p><b>Seeding rate.</b> Never recorded in the TAPS data. Follows Medeiros et al. (2026) and University
-    of Minnesota Extension.</p>
-    <p><b>Irrigation timing is not scored.</b> The TAPS records hold a season total for each plot, not a
-    diary of application dates, so the model can learn how much water matters but not when. You pick your
-    inches by month; only the total goes into the prediction.</p>
-    <p><b>The season</b> is set to 2024 conditions. TAPS plots averaged 190 bu/ac in 2024 and only 146 in
-    2025, which was drought-hit, so 2024 is the fairer picture of what a Colorado acre can do. The 2025
-    competition winner harvested 228 bu/ac; the game will reward a good plan at roughly that level.</p>
-    <p><b>Costs</b> are the CSU TAPS 2026 Farm Budget at April prices, line for line. Nothing has been
-    added to it.</p>
-    <p>A full workbook explaining every equation and constant is available at the booth &mdash;
-    <b>CSU_Ag_Fest_Model_Explained.xlsx</b>.</p>
+    <p><b>Yield</b> comes from the CSU AI Team machine learning model, trained on real TAPS
+    field data. It takes your five decisions &mdash; soil nitrate, hybrid maturity (CRM),
+    seeding rate, nitrogen and irrigation &mdash; and predicts bu/ac.</p>
+    <p><b>NUE</b>, nitrogen use efficiency, is your yield divided by the nitrogen you applied.
+    Units are bu/lb N.</p>
+    <p><b>WUE</b>, water use efficiency, is your yield divided by the water you applied.
+    Units are bu/in.</p>
+    <p><b>Cost of production</b> adds up every input you chose plus the fixed costs of farming
+    the acre, in $/ac.</p>
+    <p><b>Profit</b> is your yield sold at <b>$${CORN_PRICE.toFixed(2)}/bu</b>, the same price
+    for every competitor, minus your cost of production.</p>
   </div></div>`;
 }
 function openAdmin(){
