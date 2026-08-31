@@ -39,13 +39,13 @@ h1.hero{font-weight:700;letter-spacing:-.02em;font-size:clamp(28px,6.6vw,44px);l
 h2.sc{font-weight:800;letter-spacing:-.025em;font-size:clamp(24px,5.6vw,31px);line-height:1.1;margin:5px 0 6px;color:var(--green)}
 .lede{color:var(--mute);font-size:16px;line-height:1.55;max-width:56ch}
 /* header band */
-.band{background:var(--green);border-radius:14px;padding:11px 15px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.band .lg{display:flex;align-items:center;gap:10px}
-.band .logo{height:34px;width:auto;display:block;border-radius:5px;background:#FFFFFF;padding:4px 7px}
+.band{background:var(--green);border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.band .lg{display:flex;align-items:center;gap:12px;text-align:left;min-width:0}
+.band .logo{height:42px;width:auto;display:block;border-radius:6px;background:#FFFFFF;padding:5px 8px;flex:0 0 auto}
 .band .badge{background:#FFFFFF;color:var(--green);border-radius:5px;padding:3px 9px;font-weight:800;font-size:13.5px;letter-spacing:.04em}
 .hero-logo{height:78px;width:auto;display:block;margin-bottom:18px;max-width:100%}
-.band .ttl{color:#fff;font-family:var(--font);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase}
-.band .link{color:#FFFFFF}
+.band .ttl{color:#FFFFFF;font-family:var(--font);font-size:15px;font-weight:700;letter-spacing:.02em;line-height:1.2}
+.band .link{color:#FFFFFF;font-size:13px;flex:0 0 auto}
 .band .link:hover{color:#fff}
 /* footnote — the "what is this" box under each decision */
 .fn{background:var(--green-lt);border:1px solid #D6D6D6;border-left:3px solid var(--green);border-radius:10px;padding:12px 14px}
@@ -124,7 +124,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 /* metrics */
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .metrics .panel{padding:12px}
-.mk{font-family:var(--font);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.mk{font-family:var(--font);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:6px}
+.award{height:22px;width:auto;display:block;flex:0 0 auto}
+.awardbig{height:52px;width:auto;display:block;margin:0 auto 8px}
 .mv{font-family:var(--font);font-size:21px;font-weight:700;margin-top:3px}
 .mu{font-family:var(--font);font-size:12px;color:var(--mute)}
 .pivot-hold{position:relative;width:242px;height:242px;max-width:72vw;max-height:72vw;margin:0 auto}
@@ -155,21 +157,21 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .tabs{display:flex;gap:6px}
 .tabs button{flex:1;border-radius:10px;padding:9px 4px;font-family:var(--font);font-size:13px;border:1px solid var(--line);color:var(--mute);background:var(--surface)}
 .tabs button.on{background:var(--green);border-color:var(--green);color:#fff}
-.lb{display:flex;align-items:center;gap:12px;padding:12px 10px;border-bottom:1px solid var(--line)}
+.lb{display:flex;align-items:flex-start;gap:12px;padding:13px 10px;border-bottom:1px solid var(--line)}
 .lb:last-child{border-bottom:none}
 .lb.me{background:var(--green-lt);border-radius:8px;box-shadow:inset 0 0 0 1px var(--green)}
 .lb .r{font-family:var(--font);font-size:15.5px;font-weight:800;width:30px;flex:0 0 auto;color:var(--mute);text-align:center}
 .lb .r.medal{width:30px;height:30px;line-height:30px;border-radius:50%;color:#fff;font-size:14px}
 .lb .who{flex:1;min-width:0}
-.lb .who b{font-weight:700;font-size:15.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lb .sub{font-family:var(--font);font-size:12px;color:var(--mute);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.lb .who b{font-weight:700;font-size:16.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb .sub{font-family:var(--font);font-size:13.5px;color:var(--mute);display:block;margin-top:3px;line-height:1.35}
 .lb .v{text-align:right;flex:0 0 auto}
-.lb .v b{font-family:var(--font);font-size:17.5px;font-weight:700;color:var(--green);display:block;line-height:1.1}
-.lb .v span{font-family:var(--font);font-size:12px;color:var(--mute);text-transform:lowercase}
+.lb .v b{font-family:var(--font);font-size:19px;font-weight:700;color:var(--green);display:block;line-height:1.1}
+.lb .v span{font-family:var(--font);font-size:12.5px;color:var(--mute);text-transform:lowercase}
 .lbhead{display:flex;align-items:center;gap:12px;padding:6px 10px 8px}
 .lbhead .r{width:30px;flex:0 0 auto}
 .lbhead .who{flex:1}
-.lbhead span{font-family:var(--font);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.lbhead span{font-family:var(--font);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 .empty{text-align:center;padding:38px 12px;font-family:var(--font);font-size:13.5px;color:var(--mute);line-height:1.7}
 /* modal */
 .scrim{position:fixed;inset:0;z-index:50;background:rgba(20,40,26,.55);display:flex;align-items:center;justify-content:center;padding:18px}
@@ -309,7 +311,7 @@ const N_REF = 110;
    a participant for over-watering. The model input is capped at the top of the
    training range: extra water still costs money and still drags WUE down, it
    just cannot buy yield the data never showed. */
-const IRR_MODEL_MAX = 19.3;   // also enforced from MODEL.limits   // lb/ac — dataset median applied N, held fixed in the model call
+const IRR_MODEL_MAX = 19.3;   // also enforced from MODEL.limits   // lb/ac, dataset median applied N, held fixed in the model call
 
 /* ── nitrogen ───────────────────────────────────────────────────────────── */
 const NITROGEN = {
@@ -338,6 +340,13 @@ const MONTHS = [
   { key:"sep", label:"Sep", max:6, note:"Finishing toward black layer. Demand tapers off." },
   { key:"oct", label:"Oct", max:3, note:"Harvest window. Rarely any water left to apply." },
 ];
+
+/* ── Award icons, embedded so the page stays a single file ──────────────── */
+const ICON = {
+  yield_:     "data:image/png;base64,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",
+  efficiency: "data:image/png;base64,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",
+  profit:     "data:image/png;base64,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",
+};
 
 const CORN_PRICE = 5.00;   // $/bu — one market price for every competitor
 
@@ -544,7 +553,9 @@ function evaluate(st){
 
   return { totalIrr, appliedN, events, hybrid:h, attainable, N, wet,
            yieldBu, cost, revenue, profit,
-           nue: appliedN>0 ? yieldBu/appliedN : null,
+           /* Partial Factor Productivity: bu of grain per lb of N applied. */
+           pfp: appliedN>0 ? yieldBu/appliedN : null,
+           /* Water Use Efficiency: bu of grain per in of irrigation applied. */
            wue: totalIrr>0 ? yieldBu/totalIrr : null };
 }
 
@@ -559,7 +570,8 @@ function icon(n,c,s){
     left:'<path d="M14 6l-6 6 6 6"/>',right:'<path d="M10 6l6 6-6 6"/>',
     trophy:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/><path d="M10 14v3h4v-3M8 20h8"/>',
     x:'<path d="M6 6l12 12M18 6L6 18"/>',down:'<path d="M12 4v11M7 11l5 5 5-5"/><path d="M5 20h14"/>',
-    redo:'<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>'};
+    redo:'<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>',
+    home:'<path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/>'};
   return `<svg width="${s||16}" height="${s||16}" viewBox="0 0 24 24" fill="none" stroke="${c||'currentColor'}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px">${P[n]||''}</svg>`;
 }
 function fn(title, body){ return `<div class="fn"><b>${title}</b><span>${body}</span></div>`; }
@@ -598,14 +610,14 @@ function welcome(){
       <h1 class="hero">Virtual Farm Competition</h1>
       <p class="lede" style="margin-top:12px">You get six decisions on one acre of Colorado corn: your soil
       nitrogen, the hybrid, how thick to plant it, how much nitrogen and when, and how much water each
-      month. Then we settle up &mdash; your yield, how efficiently you used nitrogen and water, and what
+      month. Then we settle up: your yield, how efficiently you used nitrogen and water, and what
       the acre cost to grow.</p></div>
     <div class="panel pad">
       <div class="eyebrow m">Scored on</div>
       <table class="tbl" style="margin-top:8px">
         <tr><td>Yield</td><td>bu /ac</td></tr>
-        <tr><td>NUE &mdash; nitrogen use efficiency</td><td>bu/lb N applied</td></tr>
-        <tr><td>WUE &mdash; water use efficiency</td><td>bu/in applied</td></tr>
+        <tr><td>NUE, nitrogen use efficiency</td><td>bu/lb N applied</td></tr>
+        <tr><td>WUE, water use efficiency</td><td>bu/in applied</td></tr>
         <tr><td>Cost of production</td><td>dollars /ac</td></tr>
       </table></div>
     <div><div class="eyebrow m">Your name for the board</div>
@@ -683,7 +695,7 @@ function hybridScreen(){
         "Comparative Relative Maturity is a seed-industry rating of how long a hybrid needs from "+
         "planting to physiological maturity. A higher CRM has more days to build yield, but needs "+
         "more heat and more water to finish before frost. "+
-        "This competition offers "+hs.length+" hybrids from "+co.length+" companies &mdash; "+
+        "This competition offers "+hs.length+" hybrids from "+co.length+" companies: "+
         co.slice(0,-1).join(", ")+" and "+co[co.length-1]+". They run from CRM "+
         Math.min(...crm)+" to CRM "+Math.max(...crm)+", and from $"+Math.min(...bag)+" to $"+
         Math.max(...bag)+" per 80,000-seed bag.");
@@ -726,8 +738,8 @@ function nitrogenScreen(){
       <div class="bank" style="margin-top:10px">
         <i id="bkSoil" style="width:${100*S.soilN/scale}%;background:#000000"></i>
         <i id="bkBag" style="width:${100*fromBag/scale}%;background:var(--green)"></i></div>
-      <div class="legend"><span><em style="background:#000000"></em>From your soil &mdash; <b id="soilLb">${S.soilN}</b> lb</span>
-        <span><em style="background:var(--green)"></em>From the bag &mdash; <b id="bagLb">${fromBag.toFixed(0)}</b> lb taken up</span></div>
+      <div class="legend"><span><em style="background:#000000"></em>From your soil: <b id="soilLb">${S.soilN}</b> lb</span>
+        <span><em style="background:var(--green)"></em>From the bag: <b id="bagLb">${fromBag.toFixed(0)}</b> lb taken up</span></div>
     </div>
     ${dial({key:"nPre",label:"Pre-plant",unit:"lb/ac",value:S.nPre,display:S.nPre,min:0,max:30,step:10,color:"var(--ink)",
       hint:"Comes in the pre-plant mix with phosphorus, worked in before the planter runs. The full package is 30 lb N /ac."})}
@@ -739,7 +751,7 @@ function nitrogenScreen(){
         ${[3,4].map(n=>`<button class="chip${S.nEvents===n?' on':''}" data-ev="${n}">${n} applications</button>`).join('')}
         <span class="small" style="align-self:center">$${BUDGET.fertigationApp.toFixed(2)} /pass</span></div>
       <div class="small" style="margin-top:9px">TAPS times fertigation at V8, V12, tassel and R1. More, smaller
-      doses track the crop's appetite and less nitrogen escapes &mdash; but each pass costs money. Splitting pays
+      doses track the crop's appetite and less nitrogen escapes, but each pass costs money. Splitting pays
       when nitrogen is tight and wastes money when you have already applied plenty.</div></div>
     ${fn("Soil nitrogen counts before anything you buy",
       "What feeds the crop is soil nitrate plus the share of applied fertiliser it takes up. In 2024 the "+
@@ -770,9 +782,9 @@ function waterScreen(){
       <div class="eyebrow m" style="color:var(--ink)">Past the edge of the data</div>
       <div class="small" style="margin-top:5px">TAPS plots ran from 4.1 to 19.3 in, so that is as far as
       the model can see. Water beyond 19.3 in still costs you, still drags your WUE down, and starts leaching
-      nitrogen past the roots &mdash; it will not buy you bu.</div></div>
+      nitrogen past the roots, and it will not buy you bu.</div></div>
     <div class="panel pad"><div class="eyebrow m">What the crop is doing</div>
-      <div style="margin-top:9px">${MONTHS.map(m=>`<div class="small" style="margin-bottom:6px"><b style="color:var(--green)">${m.label}</b> &mdash; ${m.note}</div>`).join('')}</div></div>
+      <div style="margin-top:9px">${MONTHS.map(m=>`<div class="small" style="margin-bottom:6px"><b style="color:var(--green)">${m.label}</b>: ${m.note}</div>`).join('')}</div></div>
     ${fn("Water is the strongest lever you have",
       "Across both CSU-TAPS seasons, irrigation explained far more of the difference in yield between "+
       "farms than nitrogen did. A full-irrigation crop here needs roughly 16 in for the season, and teams "+
@@ -851,11 +863,11 @@ function resultScreen(){
         ${esc(r.hybrid.company)} ${esc(r.hybrid.name)}, CRM ${r.hybrid.crm}</div>
       <div class="small">soil rolled ${S.soilN} &middot; ${r.appliedN} lb N applied &middot; ${r.totalIrr.toFixed(1)} in water &middot; ${(S.pop/1000).toFixed(0)}k seeds</div></div>
     <div class="metrics">
-      ${[["Yield",r.yieldBu.toFixed(0),"bu/ac","var(--green)"],
-         ["NUE",r.nue===null?"&mdash;":r.nue.toFixed(2),"bu/lb N","var(--ink)"],
-         ["WUE",r.wue===null?"&mdash;":r.wue.toFixed(1),"bu/in","var(--ink)"],
-         ["Profit",(r.profit>=0?"$":"-$")+Math.abs(r.profit).toFixed(0),"$/ac",win?"var(--green)":"var(--red)"]]
-        .map(([k,v,u,col])=>`<div class="panel"><div class="mk">${k}</div><div class="mv" style="color:${col}">${v}</div><div class="mu">${u}</div></div>`).join('')}
+      ${[["Yield",r.yieldBu.toFixed(0),"bu/ac","var(--green)",ICON.yield_],
+         ["PFP",r.pfp===null?"&mdash;":r.pfp.toFixed(2),"bu/lb N","var(--ink)",ICON.efficiency],
+         ["WUE",r.wue===null?"&mdash;":r.wue.toFixed(1),"bu/in","var(--ink)",ICON.efficiency],
+         ["Profit",(r.profit>=0?"$":"-$")+Math.abs(r.profit).toFixed(0),"$/ac",win?"var(--green)":"var(--red)",ICON.profit]]
+        .map(([k,v,u,col,ic])=>`<div class="panel"><div class="mk">${ic?`<img class="award" src="${ic}" alt="">`:''}${k}</div><div class="mv" style="color:${col}">${v}</div><div class="mu">${u}</div></div>`).join('')}
     </div>
   </div>`;
   const right=`<div class="stack">
@@ -863,14 +875,14 @@ function resultScreen(){
       <table class="tbl" style="margin-top:10px">
         <tr><td><b>Yield</b><br><span class="small">How much corn the acre grew.</span></td>
             <td style="vertical-align:top"><b>${r.yieldBu.toFixed(1)}</b><br><span class="small">bu/ac</span></td></tr>
-        <tr><td><b>NUE</b><br><span class="small">bu grown for each pound of nitrogen you applied. Nitrogen cost you $${c.nCost.toFixed(0)} /ac, so a higher NUE means each of those dollars bought more grain.</span></td>
-            <td style="vertical-align:top"><b>${r.nue===null?"&mdash;":r.nue.toFixed(2)}</b><br><span class="small">bu/lb N</span></td></tr>
-        <tr><td><b>WUE</b><br><span class="small">bu grown for each inch of water you applied. Water cost you $${c.waterCost.toFixed(0)} /ac plus the pumping passes, so a higher WUE means cheaper bu.</span></td>
+        <tr><td><b>PFP</b> &nbsp;<span class="small">Partial Factor Productivity</span><br><span class="small">bu grown for each lb of nitrogen you applied. Nitrogen cost you $${c.nCost.toFixed(0)} /ac, so a higher NUE means each of those dollars bought more grain.</span></td>
+            <td style="vertical-align:top"><b>${r.pfp===null?"&mdash;":r.pfp.toFixed(2)}</b><br><span class="small">bu/lb N</span></td></tr>
+        <tr><td><b>WUE</b> &nbsp;<span class="small">Water Use Efficiency</span><br><span class="small">bu grown for each in of water you applied. Water cost you $${c.waterCost.toFixed(0)} /ac plus the pumping passes, so a higher WUE means cheaper bu.</span></td>
             <td style="vertical-align:top"><b>${r.wue===null?"&mdash;":r.wue.toFixed(2)}</b><br><span class="small">bu/in</span></td></tr>
       </table></div>
     <div class="panel pad"><div class="eyebrow m">Cost and profit</div>
       <table class="tbl" style="margin-top:9px">
-        <tr><td>Revenue &mdash; ${r.yieldBu.toFixed(0)} bu at $${CORN_PRICE.toFixed(2)}</td><td>$${r.revenue.toFixed(2)}</td></tr>
+        <tr><td>Revenue, ${r.yieldBu.toFixed(0)} bu at $${CORN_PRICE.toFixed(2)}</td><td>$${r.revenue.toFixed(2)}</td></tr>
         <tr><td>Field operations</td><td>&minus;$${c.opsTotal.toFixed(2)}</td></tr>
         <tr><td>Materials and services</td><td>&minus;$${c.matsTotal.toFixed(2)}</td></tr>
         <tr><td>Interest, overhead and cash rent</td><td>&minus;$${(c.interest+c.overhead+c.cashRent).toFixed(2)}</td></tr>
@@ -881,8 +893,10 @@ function resultScreen(){
         <tr><td>Break-even yield at $${CORN_PRICE.toFixed(2)}</td><td>${(c.total/CORN_PRICE).toFixed(0)} bu/ac</td></tr>
       </table></div>
     ${fn("Three ways to win",
-      "CSU-TAPS gives separate awards for highest yield, most input use efficient and most profitable. "+
-      "They rarely go to the same farm.")}
+      "CSU-TAPS gives separate awards for highest yield, most input use efficient and most profitable, "+
+      "and they rarely go to the same farm. PFP is Partial Factor Productivity, bu of grain per lb of "+
+      "nitrogen applied. WUE is bu of grain per in of irrigation applied. Across the CSU-TAPS field, "+
+      "PFP averages about 1.8 bu/lb.")}
     ${S.saved
       ? `<div class="panel pad" style="text-align:center;background:var(--green-lt);border-color:var(--green)">
            <div style="font-weight:800;font-size:17px;color:var(--green)">You're #${S.rank} on the yield board</div></div>
@@ -906,8 +920,8 @@ function boardScreen(){
   const mine = local.filter(e=>e.id===S.lastId);
   const rows0 = S.adminView ? all : mine;
   const T=[{id:"yield", label:"Yield",  g:e=>e.yieldBu, f:v=>v.toFixed(0),  u:"bu/ac",  hi:true},
-           {id:"nue",   label:"NUE",    g:e=>e.nue==null?-1:e.nue, f:v=>v<0?"—":v.toFixed(2), u:"bu/lb N", hi:true},
-           {id:"wue",   label:"WUE",    g:e=>e.wue==null?-1:e.wue, f:v=>v<0?"—":v.toFixed(1), u:"bu/in",   hi:true},
+           {id:"pfp",  label:"PFP",    g:e=>e.pfp==null?-1:e.pfp, f:v=>v<0?"—":v.toFixed(2), u:"bu/lb N", hi:true},
+           {id:"wue",  label:"WUE",    g:e=>e.wue==null?-1:e.wue, f:v=>v<0?"—":v.toFixed(1), u:"bu/in",   hi:true},
            {id:"profit",label:"Profit", g:e=>e.profit,  f:v=>(v>=0?"$":"-$")+Math.abs(v).toFixed(0), u:"$/ac", hi:true},
            {id:"cost",  label:"Cost",   g:e=>e.cTotal, f:v=>"$"+v.toFixed(0), u:"$/ac", hi:false}];
   const t=T.find(x=>x.id===S.tab)||T[0];
@@ -916,7 +930,7 @@ function boardScreen(){
 
   const src = S.remoteState==="ok"    ? `${all.length} entr${all.length===1?'y':'ies'} from every phone`
             : S.remoteState==="loading" ? "Loading from the shared board..."
-            : S.remoteState==="error"   ? `Shared board unreachable &mdash; showing ${all.length} from this device`
+            : S.remoteState==="error"   ? `Shared board unreachable, showing ${all.length} from this device`
             : `${all.length} entr${all.length===1?'y':'ies'} on this device. Sharing is off, so phones keep their own scores.`;
   const header = S.adminView
     ? `<div><div class="eyebrow">Booth view &middot; all participants</div>
@@ -943,7 +957,7 @@ function boardScreen(){
     <div class="panel" style="padding:5px 8px">
       ${rows.length?`<div class="lbhead"><span class="r"></span><span class="who"><span>${S.adminView?'Rank and grower':'Your acre'}</span></span><span><span>${t.label} &middot; ${t.u}</span></span></div>`:''}
       ${body}</div>
-    ${S.adminView && (S.tab==="nue"||S.tab==="wue")
+    ${S.adminView && (S.tab==="pfp"||S.tab==="wue")
       ? fn("Read this board next to the yield board",
           "Efficiency rewards buying less. A farm that applies almost no nitrogen can top this board with "+
           "a modest crop. Across the real CSU-TAPS field, nitrogen efficiency averages about 1.8 bu/lb and "+
@@ -959,6 +973,7 @@ function boardScreen(){
          ${shareEnabled()?`<button class="btn ghost" id="refreshBtn">${icon("redo","var(--green)",16)} Refresh from all phones</button>`:''}
          <button class="btn ghost" id="allBtn">${icon("down","var(--green)",16)} Download all results (Excel)</button>`
       : `<button class="btn ghost" id="xlBtn">${icon("down","var(--green)",16)} Download my results (Excel)</button>`}
+    <button class="btn" data-go="welcome">${icon("home","#FFFFFF",16)} Back to the start</button>
   </div>`;
 }
 
@@ -997,8 +1012,8 @@ function budgetRows(r,name){
     ["= Final yield",+r.yieldBu.toFixed(1)],[],
     ["RESULTS"],
     ["Yield (bu/ac)",+r.yieldBu.toFixed(1)],
-    ["NUE (bu/lb N applied)",r.nue==null?"n/a":+r.nue.toFixed(3)],
-    ["WUE (bu/in)",r.wue==null?"n/a":+r.wue.toFixed(2)],
+    ["PFP, bu per lb N applied",r.pfp==null?"n/a":+r.pfp.toFixed(3)],
+    ["WUE, bu per in applied",r.wue==null?"n/a":+r.wue.toFixed(2)],
     ["Cost of production ($/ac)",+c.total.toFixed(2)],
     ["Corn price ($/bu)",CORN_PRICE],
     ["Revenue ($/ac)",+r.revenue.toFixed(2)],
@@ -1025,7 +1040,7 @@ function exportAll(){
     ...MONTHS.map(m=>"Irr_"+m.label+"_in"),"Irr_total_in","Irr_events",
     "N_available_lb","N_demand_lb","N_ratio","N_recovery",
     "Attainable_bu","N_factor","Wet_factor","Yield_bu",
-    "NUE_bu_per_lb","WUE_bu_per_in",
+    "PFP_bu_per_lb_N","WUE_bu_per_in",
     "Cost_fieldops","Cost_materials","Cost_interest","Cost_overhead","Cost_rent",
     "Cost_total_usd_per_ac","Revenue_usd_per_ac","Profit_usd_per_ac","Timestamp"];
   const sorted=all.slice().sort((a,b)=>b.yieldBu-a.yieldBu);
@@ -1034,7 +1049,7 @@ function exportAll(){
     ...MONTHS.map(m=>+(e.months&&e.months[m.key]||0).toFixed(2)),+e.irr.toFixed(2),e.irrEvents,
     +e.nAvail.toFixed(1),+e.nDemand.toFixed(1),+e.nRatio.toFixed(3),+e.nRec.toFixed(3),
     +e.attainable.toFixed(1),+e.fN.toFixed(4),+e.wet.toFixed(4),+e.yieldBu.toFixed(1),
-    e.nue==null?"":+e.nue.toFixed(3),e.wue==null?"":+e.wue.toFixed(2),
+    e.pfp==null?"":+e.pfp.toFixed(3),e.wue==null?"":+e.wue.toFixed(2),
     +e.cOps.toFixed(2),+e.cMats.toFixed(2),+e.cInt.toFixed(2),+e.cOver.toFixed(2),+e.cRent.toFixed(2),
     +e.cTotal.toFixed(2),+e.revenue.toFixed(2),+e.profit.toFixed(2),new Date(e.ts).toISOString()])];
   const pick=(arr,key,hi)=>{const w=arr.filter(x=>x[key]!=null).sort((a,b)=>hi?b[key]-a[key]:a[key]-b[key])[0];
@@ -1061,8 +1076,8 @@ function openAbout(){
     <div class="between" style="margin-bottom:14px"><span class="eyebrow">How it works</span>
       <button data-close="1">${icon("x","var(--mute)",18)}</button></div>
     <p><b>Yield</b> comes from the CSU AI Team machine learning model, trained on real TAPS
-    field data. It takes your five decisions &mdash; soil nitrate, hybrid maturity (CRM),
-    seeding rate, nitrogen and irrigation &mdash; and predicts bu/ac.</p>
+    field data. It takes your five decisions (soil nitrate, hybrid maturity or CRM,
+    seeding rate, nitrogen and irrigation) and predicts bu/ac.</p>
     <p><b>NUE</b>, nitrogen use efficiency, is your yield divided by the nitrogen you applied.
     Units are bu/lb N.</p>
     <p><b>WUE</b>, water use efficiency, is your yield divided by the water you applied.
@@ -1160,7 +1175,7 @@ function postScore(){
     months:Object.assign({},S.irr), irr:r.totalIrr, irrEvents:c.irrEvents,
     nAvail:r.N.avail, nDemand:r.N.demand, nRatio:r.N.ratio, nRec:r.N.rec,
     attainable:r.attainable, fN:r.N.f, wet:r.wet, bag:r.hybrid.bag, yieldBu:r.yieldBu,
-    nue:r.nue, wue:r.wue,
+    pfp:r.pfp, wue:r.wue,
     cOps:c.opsTotal, cMats:c.matsTotal, cInt:c.interest, cOver:c.overhead,
     cRent:c.cashRent, cTotal:c.total, perBu:c.perBushel,
     revenue:r.revenue, profit:r.profit, ts:Date.now() };
