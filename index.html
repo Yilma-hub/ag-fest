@@ -56,6 +56,42 @@ h2.sc{font-weight:800;letter-spacing:-.025em;font-size:clamp(24px,5.6vw,31px);li
 .band .ttl{color:#FFFFFF;font-family:var(--font);font-size:15.5px;font-weight:700;line-height:1.2}
 .band .link{color:#FFFFFF;font-size:13px;flex:0 0 auto}
 .band .link:hover{color:var(--green-lt)}
+/* one row per month: name, rain, applied, total, with the slider beneath */
+.wtab{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.wtab .hd,.wtab .mr{display:grid;grid-template-columns:1fr 3.2rem 3.2rem 3.4rem;
+  gap:6px;align-items:center;padding:7px 11px}
+.wtab .hd{background:var(--surf2);border-bottom:1px solid var(--line)}
+.wtab .hd span{font-family:var(--font);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--mute);text-align:right}
+.wtab .hd span:first-child{text-align:left}
+.wtab .mr{border-top:1px solid var(--line)}
+.wtab .mr:first-of-type{border-top:none}
+.wtab .mr b{font-weight:700;font-size:14px}
+.wtab .mr i{font-style:normal;font-family:var(--font);font-size:14px;text-align:right;color:var(--mute)}
+.wtab .mr i.ap{color:var(--ink);font-weight:700}
+.wtab .mr i.tt{color:var(--green);font-weight:700}
+.wtab .sl{padding:0 11px 11px}
+.wtab .sl input[type=range]{width:100%}
+.wtab .tot{display:grid;grid-template-columns:1fr 3.2rem 3.2rem 3.4rem;gap:6px;align-items:center;
+  padding:10px 11px;background:var(--green-lt);border-top:1px solid var(--green)}
+.wtab .tot b{font-weight:700;font-size:14px;color:var(--green)}
+.wtab .tot i{font-style:normal;font-family:var(--font);font-size:15px;font-weight:700;
+  text-align:right;color:var(--green)}
+/* month-by-month water table */
+.wtab-head,.wtab-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:6px;align-items:baseline}
+.wtab-head{font-family:var(--font);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--mute);padding-bottom:7px;border-bottom:1px solid var(--line);margin-bottom:9px}
+.wtab-head span:not(:first-child),.wtab-row span:not(:first-child){text-align:right}
+.wrow{padding:7px 0;border-bottom:1px solid var(--line)}
+.wrow:last-of-type{border-bottom:none}
+.wmo{font-family:var(--font);font-size:14px;font-weight:700}
+.wnum{font-family:var(--font);font-size:14px;font-variant-numeric:tabular-nums;color:var(--mute)}
+.wnum.wirr{color:var(--ink);font-weight:700}
+.wnum.wtot{color:var(--green);font-weight:700}
+.wslide{margin-top:6px}
+.wtab-sum{margin-top:10px;padding-top:10px;border-top:2px solid var(--green)}
+.wtab-sum .wmo,.wtab-sum .wnum{font-size:15px;font-weight:700;color:var(--ink)}
+.wtab-sum .wtot{color:var(--green)}
 /* progress */
 .prog{display:flex;gap:5px;margin-bottom:16px}
 .prog i{flex:1;height:4px;border-radius:99px;background:var(--line)}
@@ -958,49 +994,59 @@ function waterScreen(){
   const tot=MONTHS.reduce((a,m)=>a+S.irr[m.key],0);
   const rain=rainFor(S.season);
   const rainTot=MONTHS.reduce((a,m)=>a+(rain[m.key]||0),0);
-  const cropWater=tot+rainTot*RAIN_EFFECTIVE;
-  return `<div class="narrow">${progress()}<div class="stack">
-    <div><div class="eyebrow">Decision 5 of 6</div><h2 class="sc">Irrigate, month by month</h2>
-      <p class="lede">Set in of water for each month. What counts is the season total.</p></div>
+  const both=tot+rainTot;
+  return `<div class="two"><div class="stack">
+    <div><div class="eyebrow">Decision 5 of 6</div>
+      <h2 class="sc">Irrigate, month by month</h2>
+      <p class="lede">Pick your rainfall season, then set inches of water for each month.
+      Both the amount and the timing count.</p></div>
+
     <div class="panel pad">
-      <div class="between" style="margin-bottom:8px"><span class="eyebrow m">Season total</span></div>
-      <div class="tot" style="margin-bottom:12px"><b id="irrTot">${tot.toFixed(1)}</b><span class="dunit">in</span>
-        <span class="small" id="irrCost" style="margin-left:auto">$${(tot*BUDGET.waterPerIn).toFixed(0)}/ac of water and power</span></div>
-      ${MONTHS.map(m=>`<div class="mrow"><span class="mo">${m.label}</span>
-        <button class="step" data-bump="irr.${m.key}" data-dir="-1" aria-label="less">${icon("minus","var(--ink)",15)}</button>
-        <input type="range" id="r-irr.${m.key}" data-slide="irr.${m.key}" min="0" max="${m.max}" step="0.5" value="${S.irr[m.key]}" style="--c:var(--ink)">
-        <button class="step" data-bump="irr.${m.key}" data-dir="1" aria-label="more">${icon("plus","var(--ink)",15)}</button>
-        <span class="amt" id="v-irr.${m.key}">${S.irr[m.key].toFixed(1)}"</span></div>`).join('')}
+      <div class="eyebrow m" style="margin-bottom:9px">Rainfall season</div>
+      <div class="chips">
+        ${RAIN_SEASONS.map(x=>`<button class="chip${S.season===x.key?' on':''}" data-season="${x.key}">${x.label}</button>`).join('')}
+      </div>
     </div>
+
+    <div class="panel pad">
+      <div class="wtab-head">
+        <span>Month</span><span>Rainfall</span><span>Irrigation</span><span>Total</span>
+      </div>
+      ${MONTHS.map(m=>{
+        const r=rain[m.key]||0, i=S.irr[m.key]||0;
+        return `<div class="wrow">
+          <div class="wtab-row">
+            <span class="wmo">${m.label}</span>
+            <span class="wnum" id="wr-${m.key}">${r.toFixed(2)}</span>
+            <span class="wnum wirr" id="wi-${m.key}">${i.toFixed(1)}</span>
+            <span class="wnum wtot" id="wt-${m.key}">${(r+i).toFixed(2)}</span>
+          </div>
+          <input class="slider wslide" type="range" min="0" max="${m.max}" step="0.5"
+                 value="${i}" data-slide="irr.${m.key}" aria-label="${m.label} irrigation">
+        </div>`;
+      }).join('')}
+      <div class="wtab-row wtab-sum">
+        <span class="wmo">Season</span>
+        <span class="wnum" id="wr-total">${rainTot.toFixed(2)}</span>
+        <span class="wnum wirr" id="wi-total">${tot.toFixed(1)}</span>
+        <span class="wnum wtot" id="wt-total">${both.toFixed(2)}</span>
+      </div>
+      <div class="small" style="margin-top:10px">Rainfall is what the season gives you. Only the water you
+      apply is scored, so the total is there to show what the crop actually receives.</div>
+    </div>
+
     <div class="panel pad" id="extraWarn" style="display:${tot>19.3?'block':'none'};border-color:var(--green)">
       <div class="eyebrow m">Past the edge of the data</div>
       <div class="small" style="margin-top:5px">TAPS plots ran from 4.1 to 19.3 in. Beyond 19.3 the model is
       guessing at conditions it has never seen, and extra water starts leaching nitrogen past the roots.</div></div>
 
-    <div class="panel pad">
-      <div class="between" style="margin-bottom:10px"><span class="eyebrow m">Rain you can count on</span>
-        <span class="small">${(rainTot).toFixed(1)} in this season</span></div>
-      <div class="chips" style="margin-bottom:12px">
-        ${RAIN_SEASONS.map(x=>`<button class="chip${S.season===x.key?' on':''}" data-season="${x.key}">${x.label}</button>`).join('')}
-      </div>
-      <div class="small" style="margin-bottom:10px">${RAIN_SEASONS.find(x=>x.key===S.season).mayAug} in of rain from May to August.</div>
-      <table class="tbl">
-        ${MONTHS.map(m=>`<tr><td>${m.label}</td><td>${(rain[m.key]||0).toFixed(2)} in rain<span id="ra-${m.key}">${S.irr[m.key]>0?` &middot; ${S.irr[m.key].toFixed(1)} in applied`:''}</span></td></tr>`).join('')}
-        <tr class="sum"><td>Crop water for the season</td><td id="cropWater">${cropWater.toFixed(1)} in</td></tr>
-      </table>
-      <div class="small" style="margin-top:9px">Crop water is your irrigation plus the ${(RAIN_EFFECTIVE*100).toFixed(0)}% of
-      rainfall that actually reaches the roots. A full crop here needs about 16 in.</div>
-    </div>
-
-    <div class="panel pad"><div class="eyebrow m">What the crop is doing</div>
-      <div style="margin-top:9px">${MONTHS.map(m=>`<div class="small" style="margin-bottom:6px"><b style="color:var(--green)">${m.label}</b>: ${m.note}</div>`).join('')}</div></div>
     ${fn("When you water matters, not just how much",
       "Across both CSU-TAPS seasons, irrigation explained more of the difference in yield between farms "+
-      "than anything else you control. A full crop here needs roughly 16 in of water. But timing counts "+
-      "too: measured across all 153 plots, water applied through tassel and grain fill returned about "+
-      "14 bu for every in, against about 5 bu for water applied at any other time. Rain is already "+
-      "working for you, so watch the crop water total rather than the inches you pump.")}
-    ${nav("nitrogen","budget","Cost of production")}</div></div>`;
+      "than anything else you control. A full crop here needs roughly 16 in of water. Timing counts too: "+
+      "measured across all 153 plots, water applied through tassel and grain fill returned about 14 bu for "+
+      "every in, against about 5 bu for water applied at any other time.")}
+    ${nav("nitrogen","budget")}
+  </div></div>`;
 }
 
 function budgetScreen(){
@@ -1097,7 +1143,9 @@ function resultScreen(){
       ? `<div class="panel pad" style="text-align:center;background:var(--green-lt);border-color:var(--green)">
            <div style="font-weight:800;font-size:17.5px;color:var(--green);margin-bottom:6px">Result sent</div>
            <div class="small">Show this screen to CSU-TAPS staff at the booth and they will add you to
-           the leaderboard.</div></div>`
+           the leaderboard.</div></div>
+         ${S.adminView ? `<button class="btn ghost" data-go="board">${icon("trophy","var(--green)",16)} Open the leaderboard</button>` : ''}
+         <button class="btn" data-go="welcome">${icon("home","#FFFFFF",16)} Back to the start</button>`
       : `<button class="btn" id="postBtn">Post my result</button>`}
   </div>`;
   const right=`<div class="stack">
@@ -1376,20 +1424,26 @@ function setInput(k,val,fromSlider){
   const rg=document.getElementById("r-"+k); if(rg&&!fromSlider) rg.value=getV(k);
 
   const sc=document.getElementById("seedCost");
-  if(sc) sc.innerHTML=`$${((S.pop/BUDGET.seedsPerBag)*BUDGET.seedPerBag).toFixed(0)}<span class="dunit">/ac</span>`;
+  if(sc) sc.innerHTML=`$${((S.pop/BUDGET.seedsPerBag)*bagPrice(S.hybrid)).toFixed(2)}<span class="dunit">/ac</span>`;
   refreshN();
-  const it=document.getElementById("irrTot");
-  if(it){ const t=MONTHS.reduce((a,m)=>a+S.irr[m.key],0);
-    it.textContent=t.toFixed(1);
-    const ic=document.getElementById("irrCost"); if(ic) ic.textContent=`$${(t*BUDGET.waterPerIn).toFixed(0)}/ac of water and power`;
-    const ew=document.getElementById("extraWarn"); if(ew) ew.style.display=t>19.3?"block":"none";
-    // the rainfall panel has to keep up with the sliders
+
+  // the month-by-month water table
+  const wt=document.getElementById("wi-total");
+  if(wt){
+    const t=MONTHS.reduce((a,m)=>a+S.irr[m.key],0);
     const rain=rainFor(S.season);
-    const rainTot=MONTHS.reduce((a,m)=>a+(rain[m.key]||0),0);
-    const cw=document.getElementById("cropWater");
-    if(cw) cw.textContent=(t+rainTot*RAIN_EFFECTIVE).toFixed(1)+" in";
-    MONTHS.forEach(m=>{ const el=document.getElementById("ra-"+m.key);
-      if(el) el.innerHTML = S.irr[m.key]>0 ? ` &middot; ${S.irr[m.key].toFixed(1)} in applied` : ""; });}
+    let rt=0;
+    MONTHS.forEach(m=>{
+      const r=rain[m.key]||0, i=S.irr[m.key]||0; rt+=r;
+      const er=document.getElementById("wr-"+m.key); if(er) er.textContent=r.toFixed(2);
+      const ei=document.getElementById("wi-"+m.key); if(ei) ei.textContent=i.toFixed(1);
+      const eo=document.getElementById("wt-"+m.key); if(eo) eo.textContent=(r+i).toFixed(2);
+    });
+    wt.textContent=t.toFixed(1);
+    const sr=document.getElementById("wr-total"); if(sr) sr.textContent=rt.toFixed(2);
+    const so=document.getElementById("wt-total"); if(so) so.textContent=(t+rt).toFixed(2);
+    const ew=document.getElementById("extraWarn"); if(ew) ew.style.display=t>19.3?"block":"none";
+  }
 }
 
 /* ── talking to the shared sheet ────────────────────────────────────────── */
@@ -1475,6 +1529,35 @@ function rollDice(btn){
 
 /* Wipes every decision so the next person starts fresh. The leaderboard is
    untouched, only the current run is cleared. */
+/* ── Surviving a refresh ────────────────────────────────────────────────────
+   A visitor who reloads mid-round should not lose their decisions. The run is
+   saved on every change and restored on load. It is cleared only when the crop
+   is grown or they go back to the start, so a fresh player never inherits the
+   previous one's plan.
+   ─────────────────────────────────────────────────────────────────────────── */
+const RUN_KEY = "csu:vfc:run";
+const RUN_FIELDS = ["view","name","group","soilN","rolledFace","hybrid","pop",
+                    "nPre","nSide","nFert","irr","season"];
+function saveRun(){
+  try{
+    const o={}; RUN_FIELDS.forEach(k=>o[k]=S[k]);
+    localStorage.setItem(RUN_KEY, JSON.stringify(o));
+  }catch(e){}
+}
+function clearRun(){ try{ localStorage.removeItem(RUN_KEY); }catch(e){} }
+function restoreRun(){
+  try{
+    const raw=localStorage.getItem(RUN_KEY);
+    if(!raw) return false;
+    const o=JSON.parse(raw);
+    if(!o || typeof o!=="object") return false;
+    RUN_FIELDS.forEach(k=>{ if(o[k]!==undefined && o[k]!==null) S[k]=o[k]; });
+    // never come back onto the result screen: that run is finished
+    if(S.view==="result"||S.view==="board") S.view="welcome";
+    return true;
+  }catch(e){ return false; }
+}
+
 function resetRun(){
   S.name=""; S.group="Student";
   S.soilN=null;
@@ -1482,6 +1565,7 @@ function resetRun(){
   S.pop=30000; S.nPre=0; S.nSide=0; S.nFert=0;
   S.irr={may:0,jun:0,jul:0,aug:0,sep:0,oct:0};
   S.result=null; S.saved=false; S.rank=null; S.lastId=null; S.tab="yield"; S.rolledFace=null; S.season="dry";
+  clearRun();
 }
 
 /* ── render + events ────────────────────────────────────────────────────── */
@@ -1504,6 +1588,8 @@ function render(){
             water:waterScreen, budget:budgetScreen, result:resultScreen, board:boardScreen };
   view.innerHTML=(V[S.view]||welcome)();
   paintHeader();
+  if(S.view!=="result"&&S.view!=="board") saveRun();
+  if(S.view!=="result"&&S.view!=="board") saveRun();
   if(S.view==="result") runCob(S.saved);
 }
 document.addEventListener("input",e=>{
@@ -1536,7 +1622,9 @@ document.addEventListener("click",e=>{
   }
   switch(el.id){
     case "confirmGrow":
-      closeModal(); S.result=evaluate(S); S.saved=false; S.rank=null; go("result"); break;
+      closeModal(); S.result=evaluate(S); S.saved=false; S.rank=null;
+      clearRun();                       // the round is over; the next player starts clean
+      go("result"); break;
     case "aboutBtn": case "aboutBtn2": openAbout(); break;
     case "postBtn": postScore(); break;
     case "xlBtn": exportMine(); break;
@@ -1558,6 +1646,7 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
 checkMode();
+restoreRun();
 if(S.adminView) pullRemote();
 render();
 
